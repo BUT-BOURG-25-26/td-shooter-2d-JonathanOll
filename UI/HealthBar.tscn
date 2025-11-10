@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbr18y73dfw7u"]
+
+[ext_resource type="Texture2D" uid="uid://cofylary07q2b" path="res://KennyAssets/SpaceShooterRedux/playerShip1_blue.png" id="1_mrfbb"]
+[ext_resource type="Script" uid="uid://cnnah0lpupxiv" path="res://Scripts/health_bar.gd" id="1_nhvnt"]
+
+[node name="HealthBar" type="Node2D" node_paths=PackedStringArray("life_container", "life_texture")]
+script = ExtResource("1_nhvnt")
+life_container = NodePath("HBoxContainer")
+life_texture = NodePath("TextureRect")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 398.0
+offset_bottom = 76.0
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -296.0
+offset_top = -158.0
+offset_right = -197.0
+offset_bottom = -83.0
+texture = ExtResource("1_mrfbb")

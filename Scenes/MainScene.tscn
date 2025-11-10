@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://b0374kj7u12q"]
+
+[ext_resource type="Script" uid="uid://dlv7ye60abyyg" path="res://Scripts/global.gd" id="1_0iob3"]
+[ext_resource type="PackedScene" uid="uid://1ywcfvleu0sg" path="res://Scenes/Player.tscn" id="1_hpc76"]
+[ext_resource type="Script" uid="uid://btnxwkunf4fjn" path="res://Scripts/camera_2d.gd" id="2_f140w"]
+[ext_resource type="Script" uid="uid://005pqr4s56iq" path="res://Scripts/enemy_spawner.gd" id="2_tr2i4"]
+[ext_resource type="Script" uid="uid://bck0lspmag5rr" path="res://Scripts/game_manager.gd" id="3_7rqgy"]
+[ext_resource type="PackedScene" uid="uid://bbr18y73dfw7u" path="res://UI/HealthBar.tscn" id="3_nhkr4"]
+[ext_resource type="PackedScene" uid="uid://hntggcd7s5wf" path="res://UI/Score.tscn" id="3_qxria"]
+[ext_resource type="PackedScene" uid="uid://cy83u32nhy2we" path="res://UI/GameOver.tscn" id="4_y4jh7"]
+[ext_resource type="Texture2D" uid="uid://d2ytjtptln2q7" path="res://KennyAssets/SpaceShooterRedux/Backgrounds/blue.png" id="7_q68mp"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_f140w"]
+diffuse_texture = ExtResource("7_q68mp")
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_0iob3")
+
+[node name="Player" parent="." instance=ExtResource("1_hpc76")]
+position = Vector2(434, 790)
+
+[node name="UI" type="Node" parent="."]
+
+[node name="HealthBar" parent="UI" node_paths=PackedStringArray("player") instance=ExtResource("3_nhkr4")]
+player = NodePath("../../Player")
+
+[node name="Score" parent="UI" instance=ExtResource("3_qxria")]
+
+[node name="GameOver" parent="UI" node_paths=PackedStringArray("player") instance=ExtResource("4_y4jh7")]
+player = NodePath("../../Player")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("3_7rqgy")
+
+[node name="EnemySpawner" type="Node" parent="GameManager"]
+script = ExtResource("2_tr2i4")
+
+[node name="Timer" type="Timer" parent="GameManager/EnemySpawner"]
+wait_time = 3.0
+autostart = true
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+z_index = -1
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(256, 256)
+autoscroll = Vector2(0, 200)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(129, 127)
+texture = SubResource("CanvasTexture_f140w")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(400, 600)
+script = ExtResource("2_f140w")
+
+[connection signal="timeout" from="GameManager/EnemySpawner/Timer" to="Player" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameManager/EnemySpawner/Timer" to="GameManager/EnemySpawner" method="_on_timer_timeout"]

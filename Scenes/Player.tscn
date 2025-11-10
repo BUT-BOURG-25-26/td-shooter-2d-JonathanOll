@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ywcfvleu0sg"]
+
+[ext_resource type="Script" uid="uid://cgt7ituenn5mj" path="res://Scripts/player.gd" id="1_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://cofylary07q2b" path="res://KennyAssets/SpaceShooterRedux/playerShip1_blue.png" id="1_rpqav"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
+size = Vector2(98, 74)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("invicibility_timer")]
+collision_mask = 6
+script = ExtResource("1_kyqiw")
+invicibility_timer = NodePath("InvicibilityTimer")
+
+[node name="PlayerShip1Blue" type="Sprite2D" parent="."]
+texture = ExtResource("1_rpqav")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kyqiw")
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="InvicibilityTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

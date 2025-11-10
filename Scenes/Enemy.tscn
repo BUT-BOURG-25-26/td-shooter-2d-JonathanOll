@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://yfmwb8vgxcih"]
+
+[ext_resource type="Texture2D" uid="uid://ca513f5s5u4ji" path="res://KennyAssets/SpaceShooterRedux/Enemies/enemyRed1.png" id="1_m1htj"]
+[ext_resource type="Script" uid="uid://b81500s3g5pwa" path="res://Scripts/enemy.gd" id="1_wovta"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wovta"]
+size = Vector2(92, 80)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_wovta")
+
+[node name="EnemyRed1" type="Sprite2D" parent="."]
+texture = ExtResource("1_m1htj")
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wovta")
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
