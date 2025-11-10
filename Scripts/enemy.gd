@@ -9,6 +9,11 @@ static var packedScene: PackedScene = preload("res://Scenes/Enemy.tscn")
 var base_position: Vector2
 var behavior: Behavior
 
+func die():
+	GameManager.score += 100
+	get_tree().current_scene.add_child(Explosion.create(position))
+	queue_free()
+
 func _physics_process(delta: float) -> void:
 	if not GameManager.is_running: return
 	position.y += vertical_speed * delta
