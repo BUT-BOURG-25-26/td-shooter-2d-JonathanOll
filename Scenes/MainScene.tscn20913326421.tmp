@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0374kj7u12q"]
+[gd_scene load_steps=12 format=3 uid="uid://b0374kj7u12q"]
 
 [ext_resource type="Script" uid="uid://dlv7ye60abyyg" path="res://Scripts/global.gd" id="1_0iob3"]
 [ext_resource type="PackedScene" uid="uid://1ywcfvleu0sg" path="res://Scenes/Player.tscn" id="1_hpc76"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://hntggcd7s5wf" path="res://UI/Score.tscn" id="3_qxria"]
 [ext_resource type="PackedScene" uid="uid://cy83u32nhy2we" path="res://UI/GameOver.tscn" id="4_y4jh7"]
 [ext_resource type="Texture2D" uid="uid://d2ytjtptln2q7" path="res://KennyAssets/SpaceShooterRedux/Backgrounds/blue.png" id="7_q68mp"]
+[ext_resource type="PackedScene" uid="uid://bkjlaxv6lh1wu" path="res://Scenes/Explosion.tscn" id="10_4b75m"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_f140w"]
 diffuse_texture = ExtResource("7_q68mp")
@@ -36,7 +37,7 @@ script = ExtResource("3_7rqgy")
 script = ExtResource("2_tr2i4")
 
 [node name="EnemyTimer" type="Timer" parent="GameManager/Spawner"]
-wait_time = 2.0
+wait_time = 3.0
 autostart = true
 
 [node name="AsteroidTimer" type="Timer" parent="GameManager/Spawner"]
@@ -61,6 +62,9 @@ texture = SubResource("CanvasTexture_f140w")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(400, 600)
 script = ExtResource("2_f140w")
+
+[node name="Explosion" parent="." instance=ExtResource("10_4b75m")]
+position = Vector2(363, 462)
 
 [connection signal="timeout" from="GameManager/Spawner/EnemyTimer" to="GameManager/Spawner" method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="GameManager/Spawner/AsteroidTimer" to="GameManager/Spawner" method="_on_asteroid_timer_timeout"]

@@ -6,10 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
 size = Vector2(98, 74)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("invicibility_timer")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("invicibility_timer", "shootTimer")]
 collision_mask = 6
 script = ExtResource("1_kyqiw")
 invicibility_timer = NodePath("InvicibilityTimer")
+shootTimer = NodePath("ShootTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kyqiw")

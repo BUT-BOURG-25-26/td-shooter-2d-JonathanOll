@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var MOVEMENT_SPEED = 300
 @export var health = 3
 @export var invicibility_timer: Timer
+@export var shootTimer: Timer
 
 func _physics_process(delta):
 	if not GameManager.is_running: return
@@ -36,3 +37,30 @@ func damage(damage):
 func _on_shoot_timer_timeout() -> void:
 	var bullet = Bullet.create(true, position)
 	get_tree().current_scene.add_child(bullet)
+
+func heal():
+	health += 1
+
+func speed_boost():
+	MOVEMENT_SPEED *= 2
+	create_timer(5, "speed_boost_end")
+
+func speed_boost_end():
+	MOVEMENT_SPEED /= 2
+	
+func bullet_speed_boost():
+	shootTimer.wait_time /= 2
+	create_timer(5, "bullet_speed_boost_end")
+
+func bullet_speed_boost_end():
+	shootTimer.wait_time *= 2
+	
+	
+
+func create_timer(time: int, fun: String):
+	var timer = Timer.new()
+	timer.wait_time = time
+	timer.one_shot = 1
+	add_child(timer)
+	timer.connect("timeout", Callable(self, fun))
+	timer.start()

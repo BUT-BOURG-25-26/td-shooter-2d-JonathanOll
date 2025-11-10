@@ -4,7 +4,7 @@ extends CharacterBody2D
 enum Behavior {SINUSOIDAL, STATIC}
 
 static var packedScene: PackedScene = preload("res://Scenes/Enemy.tscn")
-@export var vertical_speed = 50
+@export var vertical_speed = 100
 @export var horizontal_variation = 50
 var base_position: Vector2
 var behavior: Behavior
