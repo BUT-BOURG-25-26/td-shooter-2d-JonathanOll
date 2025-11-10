@@ -6,10 +6,16 @@ extends CharacterBody2D
 @export var invicibility_timer: Timer
 
 func _physics_process(delta):
+	if not GameManager.is_running: return
 	velocity.x = MOVEMENT_SPEED * (Input.get_action_strength("right") - Input.get_action_strength("left"))
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		velocity.x = clamp(get_global_mouse_position().x - position.x, - MOVEMENT_SPEED, MOVEMENT_SPEED)
+	
+	if int(invicibility_timer.time_left / 0.2) % 2 == 0:
+		show()
+	else:
+		hide()
 	
 	move_and_slide()
 

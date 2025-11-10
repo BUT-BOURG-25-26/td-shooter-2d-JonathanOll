@@ -11,9 +11,6 @@ collision_mask = 6
 script = ExtResource("1_kyqiw")
 invicibility_timer = NodePath("InvicibilityTimer")
 
-[node name="PlayerShip1Blue" type="Sprite2D" parent="."]
-texture = ExtResource("1_rpqav")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kyqiw")
 
@@ -21,5 +18,9 @@ shape = SubResource("RectangleShape2D_kyqiw")
 autostart = true
 
 [node name="InvicibilityTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_rpqav")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

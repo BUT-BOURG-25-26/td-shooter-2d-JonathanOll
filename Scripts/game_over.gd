@@ -3,9 +3,10 @@ extends Node2D
 @export var player: Player
 
 func _process(delta):
-	if hidden && player.health == 0:
+	if !visible && player.health == 0:
 		show()
 		Global.camera.shake(20)
+		GameManager.is_running = false
 		
 
 func _on_restart_pressed() -> void:

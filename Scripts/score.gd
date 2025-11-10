@@ -5,6 +5,7 @@ extends Node2D
 var value: int
 
 func _process(delta: float) -> void:
+	if not GameManager.is_running: return
 	if GameManager.score != value:
 		set_text(GameManager.score)
 		value = GameManager.score

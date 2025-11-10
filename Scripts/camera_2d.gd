@@ -11,12 +11,11 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	if shake_intensity > 0:
-		print(shake_intensity)
 		position = base_pos + Vector2(
 			randf_range(-shake_intensity, shake_intensity),
 			randf_range(-shake_intensity, shake_intensity),
 		)
-		shake_intensity -= shake_decrease * delta
+		shake_intensity = max(0, shake_intensity - shake_decrease * delta)
 	else:
 		position = base_pos
 

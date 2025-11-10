@@ -10,6 +10,7 @@ var base_position: Vector2
 var behavior: Behavior
 
 func _physics_process(delta: float) -> void:
+	if not GameManager.is_running: return
 	position.y += vertical_speed * delta
 	if behavior == Behavior.SINUSOIDAL:
 		position.x = base_position.x + sin(Time.get_ticks_msec() / (PI*1000/5)) * horizontal_variation

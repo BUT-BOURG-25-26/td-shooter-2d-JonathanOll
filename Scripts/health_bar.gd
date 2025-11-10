@@ -7,6 +7,7 @@ var value = 0
 @export var life_texture: TextureRect
 
 func _process(delta):
+	if not GameManager.is_running: return
 	var delt = player.health - value
 	if delt > 0:
 		for i in range(delt):

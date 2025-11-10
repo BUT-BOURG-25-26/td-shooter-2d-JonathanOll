@@ -7,6 +7,7 @@ var shot_by_player: bool
 @export var BULLET_SPEED = 500
 
 func _physics_process(delta):
+	if not GameManager.is_running: return
 	position.y += (-1 if shot_by_player else 1) * BULLET_SPEED * delta
 
 func _on_body_entered(body: Node2D) -> void:
