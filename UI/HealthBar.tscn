@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cnnah0lpupxiv" path="res://Scripts/health_bar.gd" id="1_nhvnt"]
 
 [node name="HealthBar" type="Node2D" node_paths=PackedStringArray("life_container", "life_texture")]
+z_index = 10
 script = ExtResource("1_nhvnt")
 life_container = NodePath("HBoxContainer")
 life_texture = NodePath("TextureRect")

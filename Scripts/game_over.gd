@@ -10,7 +10,9 @@ func _process(delta):
 		
 
 func _on_restart_pressed() -> void:
-	get_tree().reload_current_scene()  # Godot 4
+	get_tree().reload_current_scene()
+	GameManager.is_running = true
+	GameManager.score = 0
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

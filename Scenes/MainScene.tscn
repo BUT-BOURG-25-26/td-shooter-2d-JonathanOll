@@ -32,11 +32,15 @@ player = NodePath("../../Player")
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("3_7rqgy")
 
-[node name="EnemySpawner" type="Node" parent="GameManager"]
+[node name="Spawner" type="Node" parent="GameManager"]
 script = ExtResource("2_tr2i4")
 
-[node name="Timer" type="Timer" parent="GameManager/EnemySpawner"]
+[node name="EnemyTimer" type="Timer" parent="GameManager/Spawner"]
 wait_time = 3.0
+autostart = true
+
+[node name="AsteroidTimer" type="Timer" parent="GameManager/Spawner"]
+wait_time = 0.5
 autostart = true
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
@@ -54,5 +58,6 @@ texture = SubResource("CanvasTexture_f140w")
 position = Vector2(400, 600)
 script = ExtResource("2_f140w")
 
-[connection signal="timeout" from="GameManager/EnemySpawner/Timer" to="Player" method="_on_timer_timeout"]
-[connection signal="timeout" from="GameManager/EnemySpawner/Timer" to="GameManager/EnemySpawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameManager/Spawner/EnemyTimer" to="Player" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameManager/Spawner/EnemyTimer" to="GameManager/Spawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameManager/Spawner/AsteroidTimer" to="GameManager/Spawner" method="_on_asteroid_timer_timeout"]

@@ -8,6 +8,7 @@ outline_size = 5
 outline_color = Color(0, 0, 1, 1)
 
 [node name="Score" type="Node2D" node_paths=PackedStringArray("label")]
+z_index = 10
 script = ExtResource("1_mfhtn")
 label = NodePath("Label")
 

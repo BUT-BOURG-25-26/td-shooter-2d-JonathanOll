@@ -8,9 +8,14 @@ extends CharacterBody2D
 func _physics_process(delta):
 	if not GameManager.is_running: return
 	velocity.x = MOVEMENT_SPEED * (Input.get_action_strength("right") - Input.get_action_strength("left"))
+	velocity.y = MOVEMENT_SPEED * (Input.get_action_strength("bottom") - Input.get_action_strength("up"))
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		velocity.x = clamp(get_global_mouse_position().x - position.x, - MOVEMENT_SPEED, MOVEMENT_SPEED)
+		velocity = get_local_mouse_position()
+		velocity = MOVEMENT_SPEED * velocity.normalized()
+		if ((position + velocity * delta) - get_global_mouse_position()).length_squared() < 10:
+			velocity = Vector2.ZERO
+			position = get_global_mouse_position()
 	
 	if int(invicibility_timer.time_left / 0.2) % 2 == 0:
 		show()
@@ -18,6 +23,8 @@ func _physics_process(delta):
 		hide()
 	
 	move_and_slide()
+	if position.y < get_viewport().get_size().y * 2/3:
+		position.y = get_viewport().get_size().y * 2/3
 
 func damage(damage):
 	if not invicibility_timer.is_stopped():
